@@ -7,7 +7,8 @@ let RunSentimentAnalysis = ()=>{
             document.getElementById("system_response").innerHTML = xhttp.responseText;
         }
     };
-    // xhttp.open("GET", "emotionDetector?textToAnalyze"+"="+textToAnalyze, true);
-    xhttp.open("GET", "sentimentAnalyzer?textToAnalyze=" + textToAnalyze, true);
+    // xhttp.open("GET", "emotionDetector?textToAnalyze"+"="+textToAnalyze, true); - did not work
+    // xhttp.open("GET", "sentimentAnalyzer?textToAnalyze=" + textToAnalyze, true); - works for sentiment
+    xhttp.open("GET", "emotionDetector?textToAnalyze=" + textToAnalyze, true);
     xhttp.send();
 }

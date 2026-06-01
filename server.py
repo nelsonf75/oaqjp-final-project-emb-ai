@@ -1,30 +1,30 @@
-"""Flask server for the sentiment analysis application."""
+"""Flask server for emotion detection application."""
 
 from flask import Flask, render_template, request
-from SentimentAnalysis.sentiment_analysis import sentiment_analyzer
+from EmotionDetection import emotion_detector
 
-app = Flask("Sentiment Analyzer")
+app = Flask("Emotion Detector")
 
 
-@app.route("/sentimentAnalyzer")
-def sent_analyzer():
-    """Analyze sentiment of submitted text and return formatted response."""
+@app.route("/emotionDetector")
+def emotion_analyzer():
+    """Analyze emotions from user input and return formatted output."""
     text_to_analyze = request.args.get("textToAnalyze")
 
-    if not text_to_analyze or not text_to_analyze.strip():
-        return "No input provided. Please enter text to analyze."
+    response = emotion_detector(text_to_analyze)
 
-    response = sentiment_analyzer(text_to_analyze)
-
-    label = response["label"]
-    score = response["score"]
-
-    if label is None:
-        return "Invalid input! Try again."
+    anger = response["anger"]
+    disgust = response["disgust"]
+    fear = response["fear"]
+    joy = response["joy"]
+    sadness = response["sadness"]
+    dominant_emotion = response["dominant_emotion"]
 
     return (
-        f"The given text has been identified as "
-        f"{label.split('_')[1]} with a score of {score}."
+        f"For the given statement, the system response is "
+        f"'anger': {anger}, 'disgust': {disgust}, 'fear': {fear}, "
+        f"'joy': {joy} and 'sadness': {sadness}. "
+        f"The dominant emotion is {dominant_emotion}."
     )
 
 
