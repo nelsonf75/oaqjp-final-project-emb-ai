@@ -11,6 +11,9 @@ def sent_analyzer():
     """Analyze sentiment of submitted text and return formatted response."""
     text_to_analyze = request.args.get("textToAnalyze")
 
+    if not text_to_analyze or not text_to_analyze.strip():
+        return "No input provided. Please enter text to analyze."
+
     response = sentiment_analyzer(text_to_analyze)
 
     label = response["label"]
